@@ -28,7 +28,7 @@
             <h2><%= element.author %></h2>
             <h4><%= element.isbn  %> </h4>
             <p><%= element.description %></p>
-            <form action="/books/<%= element.id%>"  >
+            <form action="/books/<%= element.id%>" method="GET" >
                 <button id="btn" type="submit"> View Details </button>
             </form>
         </div>
