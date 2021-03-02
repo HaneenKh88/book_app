@@ -15,6 +15,26 @@
         <li> <a href="/searches/new">Search By Title or Author </a></li>
     </ul>
 
-   
+    
+
+    <section>
+        <% let count = 0; %>
+        <% booklist.forEach(element =>{ %>
+            <%count++;%>  
+            
+        <div>
+            <img src="<%= element.image_url %>" alt="">
+            <h2><%= element.title %> </h2>
+            <h2><%= element.author %></h2>
+            <h4><%= element.isbn  %> </h4>
+            <p><%= element.description %></p>
+            <form action="/books/<%= element.id%>"  >
+                <button id="btn" type="submit"> View Details </button>
+            </form>
+        </div>
+   <% }) %>
+    </section>
+
+    <h3><%= count%> Books in the Collection</h3>
 </body>
 </html>
