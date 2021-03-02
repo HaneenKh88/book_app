@@ -7,11 +7,11 @@ require('dotenv').config();
 
 const cors = require('cors');
 app.use(cors());
-
+const override = require('method-override');
 
 const pg = require('pg')
 const client = new pg.Client(process.env.DATABASE_URL);
-
+app.use(override('_method'));
 
 const superagent = require('superagent');
 
@@ -29,6 +29,8 @@ app.get('/searches/new', searchResultHandler);
 app.post('/searches' ,searchHandler);
 app.post('/addbooks' , AddBooksHandler);
 app.get('/books/:id' , BooksDetailHandler);
+app.put('/Updatebooks/:id', updateBookHandler);
+app.delete('/Deletebooks/:id' , BooksDeleteHandler);
 
 function AllBooksHandler (req,res){
   let SQL = `SELECT * FROM books;`
@@ -106,6 +108,31 @@ function BooksDetailHandler(req,res)
   .then((result) =>
   {
     res.render('pages/books/detail' , {booklist: result.rows[0]});
+  })
+}
+
+function updateBookHandler(req,res)
+{
+  const {title, author, isbn, image_url, description} = req.body;
+
+  let SQL = `UPDATE books SET title=$1,author=$2,isbn=$3,image_url=$4,description=$5 WHERE id =$6;`
+  const values = [title, author, isbn, image_url, description, req.params.id];
+
+  client.query(SQL, values)
+    .then(() => {
+      res.redirect(`/books/${req.params.id}`);
+    })
+
+}
+
+
+function BooksDeleteHandler(req,res)
+{
+  let SQL = `DELETE FROM books WHERE id=$1;`;
+  let value = [req.params.id];
+  client.query(SQL,value)
+  .then(()=>{
+    res.redirect('/');
   })
 }
 
