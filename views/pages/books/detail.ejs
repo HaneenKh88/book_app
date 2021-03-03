@@ -5,9 +5,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="../styles/reset.css">
+    <link rel="stylesheet" href="../styles/style.css">
 </head>
 <body>
-    <div>
+
+    <div class="mobile-container">
+        <!-- Top Navigation Menu -->
+        <div class="topnav">
+          <a href="/" class="active">Home</a>
+          <div class="myLinks">
+            <a href="/searches/new">Add a New Book</a>
+            <!-- <a href="/">Home</a> -->
+          </div>
+        </div>
+        
+    <div id="Book">
         <img src="<%= booklist.image_url %>" alt="">
         <h2><%= booklist.title %> </h2>
         <h2><%= booklist.author %></h2>
@@ -15,10 +28,10 @@
         <p><%= booklist.description %></p>
 
             <form action="/Deletebooks/<%= booklist.id %>?_method=delete" method="post">
-                <button type="submit" class="btn">delete</button>
+                <button id="button-delete" type="submit" >delete</button>
             </form>
 
-            <button id="btn-update">Update</button>
+            <button id="btn-update" type="submit">Update</button>
 
 
            <section id="FormUpdate">
@@ -30,7 +43,7 @@
                     <textarea name="description" cols="30" rows="10" name="description">
                         <%= booklist.description %>
                     </textarea>
-                    <button type="submit">update</button>
+                    <button id="button-add" type="submit">update</button>
                 </form>
             </section>
        

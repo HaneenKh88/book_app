@@ -5,13 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="styles/reset.css">
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="../styles/reset.css">
+    <link rel="stylesheet" href="../styles/style.css">
    
 </head>
 <body>
+
+    <div class="mobile-container">
+        <!-- Top Navigation Menu -->
+        <div class="topnav">
+          <a href="/" class="active">Home</a>
+          <div class="myLinks">
+            <a href="/searches/new">Add a New Book</a>
+            <!-- <a href="/">Home</a> -->
+          </div>
+        </div>
+        
+    <section id="MainSec">
     <% BooksList.forEach(element => {  %> 
-        <div class="div">
+        <div id="Book">
             <img src="<%= element.imgUrl %> " alt="">
             <h1><%= element.title %> </h1>
             <h3> <%= element.author  %> </h3>
@@ -23,9 +35,10 @@
                 <input type="hidden" name="isbn" value="<%= element.isbn %>">
                 <input type="hidden" name="image_url" value="<%= element.imgUrl %>">
                 <input type="hidden" name="description" value="<%= element.description %>">
-                <button type="submit" id="submit"> Add To My BookShelf </button>
+                <button id="button-add" type="submit" id="submit"> Add To My BookShelf </button>
             </form>
         </div>
   <%   });  %> 
+</section>
 </body>
 </html>
